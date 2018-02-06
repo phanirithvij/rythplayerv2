@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title id="pagetitle"></title>
 <style> 
 body{
 	height: 5000px;
@@ -41,8 +42,8 @@ body{
 <body>
 
 <div class="bottomMenu" onclick="stopfunc();">
-<div id="player" style="width: 400px;height: 400px;border: 1px solid black;"><video id="vid" style="width: 300px;height: auto;" width="320px" src="/ug/ug2k17/cse/phani.rithvij/Downloads/Souleater/Soul_Eater_(Sub)_Episode_001.mp4" controls=""></video>
-</div><div class="small" style="top: 400px;left: 400px;" onclick="console.log(this)">
+<div id="player" style="width: 400px;height: 400px;border: 1px solid black;"><video id="vid" style="width: 300px;height: auto;" width="320px" src="Fairy_Tail_051_Love_&_Lucky.mp4 " controls=""></video>
+</div><div class="small" style="top: 400px;left: 400px;" onclick="//console.log(this)">
 </div>
 <div id="prev-next">
 	<button onclick="prevvid()"> <- </button>
@@ -54,6 +55,7 @@ body{
 	<div class="c3" style="width: 95%;height: 5%;position:relative; border: 1px solid black;"></div>
 </div>-->
 <script type="text/javascript">
+	var title = document.querySelector("#pagetitle");
 	var div = document.querySelector('#player');
 	var butt = document.querySelector('.small');
 	var video = document.querySelector('#vid');
@@ -123,18 +125,40 @@ $(document).scroll(function () {
     }
 
 });
+	function changeTitle(ti){
+		title.innerHTML = ti + '';
+	}
 	function nextvid(){
 		var s = video.src;
 		var arr = s.split("_");
 		var m =	arr.pop();
 		var j = m.split(".")[1];
 		var n =	parseFloat(m);
-		var ns = arr.join("_") + `_${n+1}` + j;
-		console.log(ns);
-	}
+		var ns = arr.join("_") + `_${pad(n + 1 + '')}.` + j;
+		//console.log(ns);
+		video.src = ns;
+			var tit = video.src.split('/');
+			//console.log(tit[tit.length -1]);
+			changeTitle(tit[tit.length -1]);
+		}
 	function prevvid(){
-		video.src = "";
+		var s = video.src;
+		var arr = s.split("_");
+		var m =	arr.pop();
+		var j = m.split(".")[1];
+		var n =	parseFloat(m);
+		var ns = arr.join("_") + `_${pad(n-1+'')}.` + j;
+		//console.log(ns);
+		video.src = ns;
+		var tit = video.src.split('/');
+			//console.log(tit[tit.length -1]);
+			changeTitle(tit[tit.length -1]);	
 	}
+	function pad(s) { 
+   		while (s.length < 3) 
+      		s = '0' + s; 
+   		return s; 
+	};
 </script>
 </body>
 </html>
